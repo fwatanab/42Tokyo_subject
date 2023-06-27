@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
+/*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 00:32:49 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/05/31 13:48:34 by fwatanab         ###   ########.fr       */
+/*   Updated: 2023/06/27 22:08:33 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static long long int	cast_cheek(const char *str, size_t i, long long int f)
 	{
 		if (f == -1 && (LONG_MIN / -10 < s
 				|| (s == LONG_MIN / -10 && '0' - (LONG_MIN % -10) < str[i])))
-			return (LONG_MAX);
+			return (LONG_MIN);
 		else if (f == 1 && (LONG_MAX / 10 < s
 				|| (s == LONG_MAX / 10 && '0' + (LONG_MAX % 10) < str[i])))
 			return (LONG_MAX);
@@ -34,7 +34,7 @@ static long long int	cast_cheek(const char *str, size_t i, long long int f)
 	return (s);
 }
 
-long	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long long int	s;
 	long long int	f;
@@ -53,9 +53,9 @@ long	ft_atoi(const char *str)
 	if (str[i] == '+')
 	{
 		if (f == -1)
-			return (LONG_MAX);
+			return (0);
 		i++;
 	}
 	s = cast_cheek(str, i, f);
-	return ((long)(s * f));
+	return ((int)(s * f));
 }
