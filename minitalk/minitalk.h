@@ -2,5 +2,6 @@
 # define MINI_TALK_H
 
 # include "libft/libft.h"
+# include <signal.h>
 
 #endif
