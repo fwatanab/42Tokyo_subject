@@ -6,13 +6,13 @@
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:59:05 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/01/18 19:44:27 by fwatanab         ###   ########.fr       */
+/*   Updated: 2023/06/29 13:12:31 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
 	if ('0' <= c && c <= '9')
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
