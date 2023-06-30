@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:10:27 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/06/29 21:40:48 by fwatanab         ###   ########.fr       */
+/*   Updated: 2023/06/30 10:29:38 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	binary_conversion(int pid, char c)
 	push_message(pid, nbr, size);
 }
 
-void	send_message(int pid, char *str)
+void	repeat_message(int pid, char *str)
 {
 	while (*str)
 	{
@@ -75,6 +75,6 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
-	send_message(pid, argv[2]);
+	repeat_message(pid, argv[2]);
 	return (0);
 }
