@@ -12,58 +12,79 @@
 
 #include "../minitalk.h"
 
-void	push_message(int pid, int nbr, size_t size)
+static void	push_message(int pid, char *str)
 {
-	char	*str;
 	size_t	i;
 
 	i = 0;
-	str = ft_itoa(nbr);
-	size = 8 - size;
-	while (size)
-	{
-		kill(pid, SIGUSR1);
-		size--;
-		usleep(100);
-	}
 	while (str[i])
 	{
 		if (str[i] == '0')
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1) == -1)
+			{
+				free(str);
+				exit(1);
+			}
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+			{
+				free(str);
+				exit(1);
+			}
+		}
 		i++;
 		usleep(100);
 	}
+}
+
+static void	send_remainder(int pid, size_t byte)
+{
+	byte = 8 - byte;
+	while (byte)
+	{
+		if (kill(pid, SIGUSR1) == -1)
+			exit (1);
+		byte--;
+		usleep(100);
+	}
+}
+
+static void	binary_conversion(int pid, int c)
+{
+	int		nbr;
+	int		base;
+	size_t	byte;
+	char	*str;
+
+	nbr = 0;
+	base = 1;
+	byte = 0;
+	while (c)
+	{
+		nbr = nbr + (c % 2) * base;
+		c /= 2;
+		base *= 10;
+		byte++;
+	}
+	send_remainder(pid, byte);
+	str = ft_itoa(nbr);
+	if (!str)
+		return ;
+	push_message(pid, str);
 	free(str);
 }
 
-void	binary_conversion(int pid, char c)
+static void	repeat_message(int pid, char *str)
 {
-	int		tmp;
-	int		nbr;
-	int		base;
-	size_t	size;
+	int	tmp;
 
-	tmp = c;
-	nbr = 0;
-	base = 1;
-	size = 0;
-	while (tmp)
-	{
-		nbr = nbr + (tmp % 2) * base;
-		tmp /= 2;
-		base *= 10;
-		size++;
-	}
-	push_message(pid, nbr, size);
-}
-
-void	repeat_message(int pid, char *str)
-{
 	while (*str)
 	{
-		binary_conversion(pid, *str);
+		tmp = *str;
+		binary_conversion(pid, tmp);
 		str++;
 	}
 }

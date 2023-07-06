@@ -2,7 +2,7 @@ NAME	= so_long
 
 SRCSDIR	= src/
 
-SRCS = main.c
+SRCS = main.c graphic.c
 
 OBJS	= $(addprefix $(SRCSDIR), $(SRCS:.c=.o))
 
@@ -29,7 +29,7 @@ all:$(NAME)
 $(MLXDIR)$(MLXNAME):
 	$(MAKE) -C $(MLXDIR)
 
-libft/$(LIBFTNAME):
+$(LIBFTDIR)$(LIBFTNAME):
 	$(MAKE) -C $(LIBFTDIR)
 
 clean:

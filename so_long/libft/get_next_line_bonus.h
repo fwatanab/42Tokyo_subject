@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 02:32:49 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/04/27 17:18:48 by fwatanab         ###   ########.fr       */
+/*   Created: 2023/05/06 00:11:20 by fwatanab          #+#    #+#             */
+/*   Updated: 2023/05/16 18:21:19 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
-}
+# endif
+
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
+
+char	*get_next_line(int fd);
+char	*f_strjoin(char const *s1, char const *s2, size_t i);
+
+#endif

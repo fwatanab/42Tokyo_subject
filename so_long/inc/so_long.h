@@ -10,8 +10,11 @@ typedef struct	s_data
 	int		endian;
 }	t_data;
 
-# include "libft/libft.h"
-# include "minilibx/mlx.h"
-# include "minilibx/mlx_int.h"
+# include "../libft/libft.h"
+# include "../minilibx/mlx.h"
+# include "../minilibx/mlx_int.h"
+# include <fcntl.h>
+
+int	put_window(int argc, char **argv);
 
 #endif

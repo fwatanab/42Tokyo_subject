@@ -61,8 +61,10 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = sig_handler;
 	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
-	sigaction(SIGUSR2, &sa, NULL);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1)
+		exit(1);
+	if (sigaction(SIGUSR2, &sa, NULL) == -1)
+		exit(1);
 	while (1)
 	{
 	}

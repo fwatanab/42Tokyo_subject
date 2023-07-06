@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwatanab <fwatanab@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 02:32:49 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/04/27 17:18:48 by fwatanab         ###   ########.fr       */
+/*   Created: 2023/05/06 01:07:24 by fwatanab          #+#    #+#             */
+/*   Updated: 2023/05/06 01:07:25 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*f_strjoin(char const *s1, char const *s2, size_t i)
 {
-	size_t	i;
+	size_t	j;
+	char	*str;
 
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
+	if (!s1)
+		s1 = ft_calloc(1, 1);
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+		str[i] = s1[i];
 		i++;
 	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
+	free((char *)s1);
+	j = 0;
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
