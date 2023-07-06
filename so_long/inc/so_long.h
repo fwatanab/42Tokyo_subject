@@ -11,8 +11,9 @@ typedef struct	s_data
 }	t_data;
 
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
-# include "../minilibx/mlx_int.h"
+//# include "../minilibx/mlx.h"
+//# include "../minilibx/mlx_int.h"
+# include <mlx.h>
 # include <fcntl.h>
 
 int	put_window(int argc, char **argv);

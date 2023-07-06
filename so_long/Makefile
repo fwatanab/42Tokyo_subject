@@ -18,13 +18,13 @@ MLXNAME		= libmlx.a
 
 $(NAME):$(OBJS)
 	$(MAKE) -C $(LIBFTDIR)
-	$(MAKE) -C $(MLXDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
+#	$(MAKE) -C $(MLXDIR)
+	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft #-L$(MLXDIR) -lmlx $(MLXFRAGS)
 
 all:$(NAME)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -Imlx -c $< -o $(<:.c=.o)
 
 $(MLXDIR)$(MLXNAME):
 	$(MAKE) -C $(MLXDIR)
@@ -35,12 +35,12 @@ $(LIBFTDIR)$(LIBFTNAME):
 clean:
 	$(RM) $(OBJS)
 	$(MAKE) -C $(LIBFTDIR) clean
-	$(MAKE) -C $(MLXDIR) clean
+#	$(MAKE) -C $(MLXDIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFTDIR) fclean
-	$(MAKE) -C $(MLXDIR) fclean
+#	$(MAKE) -C $(MLXDIR) fclean
 
 
 re: fclean all

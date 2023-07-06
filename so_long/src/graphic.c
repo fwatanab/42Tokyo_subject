@@ -1,53 +1,58 @@
 #include "../inc/so_long.h"
-#include <stdio.h>///////////////////////////////
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
 
 int	put_window(int argc, char **argv)
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-	char	*relative_path = "/Users/sukakaedefutoshi/ft_git/so_long/textures/maps.xpm";
+	char	*grass_path = "/Users/fwatanab/ft_git/so_long/textures/grass.xpm";
+	char	*wood_path = "/Users/fwatanab/ft_git/so_long/textures/wood.xpm";
+	char	*door_path = "/Users/fwatanab/ft_git/so_long/textures/door.xpm";
+	char	*item_path = "/Users/fwatanab/ft_git/so_long/textures/item.xpm";
+	char	*player_path = "/Users/fwatanab/ft_git/so_long/textures/hatiware.xpm";
 	int		img_width;
 	int		img_height;
-	char	*str = "/Users/sukakaedefutoshi/ft_git/so_long/maps/map.ber";
+	int		fd;
 	size_t	i;
 	size_t	j;
 	size_t	k;
-//	char	line[96][] = 
+	char	*line;
 
 	argc = 0;
-	argv = NULL;
-	mlx = mlx_init();
-	img.img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	mlx_win = mlx_new_window(mlx, img_width, img_height, "so_long");
-	if (img.img == NULL)
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
 		return (1);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	i = 0;
-	j = 4;
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 800, 600, "so_long");
 	k = 0;
-	while (str[i])
+	line = get_next_line(fd);
+	while (line)
 	{
-		if (k == 96)
+		i = 0;
+		j = 0;
+		while (line[i])
 		{
-			j += 4;
-			k = 0;
-		}
-		else
-		{
-			mlx_string_put(mlx, mlx_win, k, j, 0, &str[i]);
-			k++;
+			ft_printf("--- %c\n", line[i]);
+			if (line[i] == 'P')
+				img.img = mlx_xpm_file_to_image(mlx, player_path, &img_width, &img_height);
+			if (line[i] == '0')
+				img.img = mlx_xpm_file_to_image(mlx, grass_path, &img_width, &img_height);
+			if (line[i] == '1')
+				img.img = mlx_xpm_file_to_image(mlx, wood_path, &img_width, &img_height);
+			if (line[i] == 'E')
+				img.img = mlx_xpm_file_to_image(mlx, door_path, &img_width, &img_height);
+			if (line[i] == 'C')
+				img.img = mlx_xpm_file_to_image(mlx, item_path, &img_width, &img_height);
+			if (img.img == NULL)
+				return (1);
+			ft_printf("w %d\nh %d\n", img_width, img_height);
+			img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+			mlx_put_image_to_window(mlx, mlx_win, img.img, j, k);
 			i++;
+			j += 40;
 		}
+		k += 40;
+		line = get_next_line(fd);
 	}
 //	check_map(argc, argv);
 	mlx_loop(mlx);

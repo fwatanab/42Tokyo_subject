@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 21:10:27 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/06/30 10:29:38 by fwatanab         ###   ########.fr       */
+/*   Updated: 2023/07/06 15:14:26 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
+	if (pid < 0)
+		return (1);
 	repeat_message(pid, argv[2]);
 	return (0);
 }
