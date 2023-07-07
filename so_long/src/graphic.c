@@ -2,13 +2,12 @@
 
 int	put_window(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
+	t_vars	vars;
 
 	argc = 0;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 600, "so_long");
-	create_map(mlx, mlx_win, argv);
-	mlx_loop(mlx);
+	vars.mlx = mlx_init();
+	vars.mlx_win = mlx_new_window(vars.mlx, 800, 600, "so_long");
+	create_map(vars, argv);
+	mlx_loop(vars.mlx);
 	return (0);
 }

@@ -1,34 +1,27 @@
 #include "../inc/so_long.h"
-#include <stdio.h>
 
-static t_path	*compare_map(void *mlx, char c)
+static t_data	*compare_map(t_vars vars, char c)
 {
-	t_path	path;
 	t_data	img;
-	int		img_width;
-	int		img_hight;
+	int		img_x;
+	int		img_y;
 
-	path.player = "/Users/sukakaedefutoshi/ft_git/so_long/textures/hatiware.xpm";
-	path.grass = "/Users/sukakaedefutoshi/ft_git/so_long/textures/grass.xpm";
-	path.wood = "/Users/sukakaedefutoshi/ft_git/so_long/textures/wood.xpm";
-	path.door = "/Users/sukakaedefutoshi/ft_git/so_long/textures/door.xpm";
-	path.item = "/Users/sukakaedefutoshi/ft_git/so_long/textures/item.xpm";
 	if (c == 'P')
-		img.img = mlx_xpm_file_to_image(mlx, path.player, &img_width, &img_hight);
+		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_PLAYER, &img_x, &img_y);
 	if (c == '0')
-		img.img = mlx_xpm_file_to_image(mlx, path.grass, &img_width, &img_hight);
+		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_GRASS, &img_x, &img_y);
 	if (c == '1')
-		img.img = mlx_xpm_file_to_image(mlx, path.wood, &img_width, &img_hight);
+		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_WOOD, &img_x, &img_y);
 	if (c == 'E')
-		img.img = mlx_xpm_file_to_image(mlx, path.door, &img_width, &img_hight);
+		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_DOOR, &img_x, &img_y);
 	if (c == 'C')
-		img.img = mlx_xpm_file_to_image(mlx, path.item, &img_width, &img_hight);
+		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_ITEM, &img_x, &img_y);
 	if (img.img == NULL)
 		error();
 	return (img.img);
 }
 
-static void	put_map(void *mlx, void *mlx_win, char *line, size_t k)
+static void	put_map(t_vars vars, char *line, size_t k)
 {
 	t_data	img;
 	size_t	i;
@@ -38,15 +31,15 @@ static void	put_map(void *mlx, void *mlx_win, char *line, size_t k)
 	j = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		img.img = compare_map(mlx, line[i]);
+		img.img = compare_map(vars, line[i]);
 		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-		mlx_put_image_to_window(mlx, mlx_win, img.img, j, k);
+		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, j, k);
 		j += 40;
 		i++;
 	}
 }
 
-void	create_map(void *mlx, void *mlx_win, char **argv)
+void	create_map(t_vars vars, char **argv)
 {
 	int		fd;
 	char	*line;
@@ -59,7 +52,7 @@ void	create_map(void *mlx, void *mlx_win, char **argv)
 	k = 0;
 	while (line)
 	{
-		put_map(mlx, mlx_win, line, k);
+		put_map(vars, line, k);
 		line = get_next_line(fd);
 		k += 40;
 	}
