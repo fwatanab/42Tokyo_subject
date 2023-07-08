@@ -19,7 +19,7 @@ MLXNAME		= libmlx.a
 $(NAME):$(OBJS)
 	$(MAKE) -C $(LIBFTDIR)
 #	$(MAKE) -C $(MLXDIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
+	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft # -L$(MLXDIR) -lmlx $(MLXFRAGS)
 
 all:$(NAME)
 

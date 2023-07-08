@@ -4,6 +4,6 @@ int	main(int argc, char **argv)
 {
 	if (argc != 2)
 		error();
-	put_window(argc, argv);
+	put_window(argv);
 	return (0);
 }

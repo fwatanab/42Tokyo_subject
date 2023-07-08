@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/08 14:24:10 by fwatanab          #+#    #+#             */
+/*   Updated: 2023/07/08 14:49:31 by fwatanab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/so_long.h"
 
 static t_data	*compare_map(t_vars vars, char c)
@@ -17,7 +29,7 @@ static t_data	*compare_map(t_vars vars, char c)
 	if (c == 'C')
 		img.img = mlx_xpm_file_to_image(vars.mlx, P_IMG_ITEM, &img_x, &img_y);
 	if (img.img == NULL)
-		error();
+		error_map(fd);
 	return (img.img);
 }
 
@@ -32,7 +44,7 @@ static void	put_map(t_vars vars, char *line, size_t k)
 	while (line[i] && line[i] != '\n')
 	{
 		img.img = compare_map(vars, line[i]);
-		img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+		img.addr = mlx_get_data_addr(img.img, &img.pixel, &img.len, &img.end);
 		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, j, k);
 		j += 40;
 		i++;

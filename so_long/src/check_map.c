@@ -1,18 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/08 14:28:00 by fwatanab          #+#    #+#             */
+/*   Updated: 2023/07/08 14:42:35 by fwatanab         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/so_long.h"
 
-int	check_map(int argc, char **argv)
+void	check_map(int fd)
 {
-	size_t	i;
-//	size_t	j;
-
-	i = 0;
-//	while (argv[i])
-//	{
-//		j = 0;
-//		while (argv[i][j])
-//			mlx_string_put()
-//	}
-	argc = 0;
-	argv = NULL;
-	return (0);
 }
