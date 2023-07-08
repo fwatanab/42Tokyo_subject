@@ -26,6 +26,8 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*mlx_win;
+	int		map_x;
+	int		map_y;
 }	t_vars;
 
 int		put_window(int argc, char **argv);
