@@ -2,9 +2,9 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-//# include "../minilibx/mlx.h"
-//# include "../minilibx/mlx_int.h"
-# include <mlx.h>
+# include "../minilibx/mlx.h"
+# include "../minilibx/mlx_int.h"
+//# include <mlx.h>
 # include <fcntl.h>
 
 # define P_IMG_PLAYER  "textures/player.xpm"
@@ -34,5 +34,6 @@ int		put_window(char **argv);
 void	create_map(t_vars vars, char **argv);
 void	error(void);
 void	error_map(int fd);
+void	checker_map(char **argv);
 
 #endif

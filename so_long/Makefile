@@ -2,7 +2,7 @@ NAME	= so_long
 
 SRCSDIR	= src/
 
-SRCS = main.c graphic.c create_map.c error.c
+SRCS = main.c graphic.c create_map.c error.c checker_map.c
 
 OBJS	= $(addprefix $(SRCSDIR), $(SRCS:.c=.o))
 
@@ -19,7 +19,7 @@ MLXNAME		= libmlx.a
 $(NAME):$(OBJS)
 	$(MAKE) -C $(LIBFTDIR)
 #	$(MAKE) -C $(MLXDIR)
-	$(CC) $(CFLAGS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft # -L$(MLXDIR) -lmlx $(MLXFRAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFTDIR) -lft -L$(MLXDIR) -lmlx $(MLXFRAGS)
 
 all:$(NAME)
 

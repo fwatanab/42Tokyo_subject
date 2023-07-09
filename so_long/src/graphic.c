@@ -24,14 +24,18 @@ size_t	my_strnlen(const char *str)
 	return (size);
 }
 
-static t_vars	map_size(int fd)
+static t_vars	map_size(char **argv)
 {
 	t_vars	vars;
+	int		fd;
 	char	*line;
 	size_t	x_size;
 	size_t	y_size;
 	size_t	tmp;
 
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		error();
 	line = get_next_line(fd);
 	if (!line)
 		error_map(fd);
@@ -49,20 +53,16 @@ static t_vars	map_size(int fd)
 		error_map(fd);
 	vars.map_x = (int)x_size * 40;
 	vars.map_y = (int)y_size * 40;
+	close(fd);
 	return (vars);
 }
 
 int	put_window(char **argv)
 {
 	t_vars	vars;
-	int		fd;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		error();
-	vars = map_size(fd);
-//	checker_map(fd);
-	close(fd);
+	vars = map_size(argv);
+	checker_map(argv, vars);
 	vars.mlx = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx, vars.map_x, vars.map_y, "so_long");
 	create_map(vars, argv);

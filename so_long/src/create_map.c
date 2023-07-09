@@ -12,7 +12,7 @@
 
 #include "../inc/so_long.h"
 
-static t_data	*compare_map(t_vars vars, char c)
+static t_data	*compare_map(t_vars vars, char c, int fd)
 {
 	t_data	img;
 	int		img_x;
@@ -33,7 +33,7 @@ static t_data	*compare_map(t_vars vars, char c)
 	return (img.img);
 }
 
-static void	put_map(t_vars vars, char *line, size_t k)
+static void	put_map(t_vars vars, char *line, size_t k, int fd)
 {
 	t_data	img;
 	size_t	i;
@@ -43,7 +43,7 @@ static void	put_map(t_vars vars, char *line, size_t k)
 	j = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		img.img = compare_map(vars, line[i]);
+		img.img = compare_map(vars, line[i], fd);
 		img.addr = mlx_get_data_addr(img.img, &img.pixel, &img.len, &img.end);
 		mlx_put_image_to_window(vars.mlx, vars.mlx_win, img.img, j, k);
 		j += 40;
@@ -64,7 +64,7 @@ void	create_map(t_vars vars, char **argv)
 	k = 0;
 	while (line)
 	{
-		put_map(vars, line, k);
+		put_map(vars, line, k, fd);
 		line = get_next_line(fd);
 		k += 40;
 	}
