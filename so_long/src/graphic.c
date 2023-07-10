@@ -6,7 +6,7 @@
 /*   By: fwatanab <fwatanab@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 14:24:18 by fwatanab          #+#    #+#             */
-/*   Updated: 2023/07/08 14:43:22 by fwatanab         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:32:43 by fwatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static t_vars	map_size(char **argv)
 	if (fd == -1)
 		error();
 	line = get_next_line(fd);
-	if (!line)
-		error_map(fd);
 	x_size = my_strnlen(line);
 	y_size = 0;
 	while (line)
